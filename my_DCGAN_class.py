@@ -168,8 +168,11 @@ class DCGAN():
                 #self.discriminator.train_on_batch(shuffled_imgs, shuffled_y)
                 self.discriminator.train_on_batch(all_imgs, all_y)
                 
-                pred = self.discriminator(shuffled_imgs)
-                _, acc = self.discriminator.evaluate(shuffled_imgs, shuffled_y, 
+                #pred = self.discriminator(shuffled_imgs)
+                #_, acc = self.discriminator.evaluate(shuffled_imgs, shuffled_y, 
+                #                                     batch_size = 2*batch_size, verbose = 0)
+                pred = self.discriminator(all_imgs)
+                _, acc = self.discriminator.evaluate(all_imgs, all_y, 
                                                      batch_size = 2*batch_size, verbose = 0)
                 batch_accuracy.append(acc)
                 # phase 2: train the generator on a new set of codings
