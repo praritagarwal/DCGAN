@@ -178,7 +178,7 @@ class DCGAN():
                 # phase 2: train the generator on a new set of codings
                 new_codings = tf.random.normal(shape = (batch_size, coding_size))
                 self.discriminator.trainable = False
-                self.GAN.train_on_batch(codings, 1-y_gan)
+                self.GAN.train_on_batch(new_codings, 1-y_gan)
                 
             # evaluate the GAN's performance so far
             mean_acc = tf.math.reduce_mean(tf.constant(batch_accuracy), axis = 0)
