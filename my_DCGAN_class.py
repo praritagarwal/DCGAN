@@ -217,3 +217,9 @@ class DCGAN():
 # 
 # ``` ipython``` has been depricated. Use ```jupyter nbconvert --to python my_DCGAN_class.ipynb``` instead.
 # 
+
+# In[ ]:
+
+
+
+
