@@ -157,13 +157,16 @@ class DCGAN():
                 all_y = tf.concat([y_true, y_gan], axis = 0)
                 
                 # shuffle the set of mixed images
-                shuffled_idxs = tf.random.shuffle(idxs)
-                shuffled_imgs = tf.gather(all_imgs, shuffled_idxs)
-                shuffled_y = tf.gather(all_y, shuffled_idxs)
+                # shuffling the set of mixed images takes a large amount of time
+                # I therefore decided to not do it
+                # shuffled_idxs = tf.random.shuffle(idxs)
+                # shuffled_imgs = tf.gather(all_imgs, shuffled_idxs)
+                # shuffled_y = tf.gather(all_y, shuffled_idxs)
                 
                 # phase 1: train the discriminator
                 self.discriminator.trainable = True
-                self.discriminator.train_on_batch(shuffled_imgs, shuffled_y)
+                #self.discriminator.train_on_batch(shuffled_imgs, shuffled_y)
+                self.discriminator.train_on_batch(all_imgs, all_y)
                 
                 pred = self.discriminator(shuffled_imgs)
                 _, acc = self.discriminator.evaluate(shuffled_imgs, shuffled_y, 
