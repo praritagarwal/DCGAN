@@ -192,7 +192,7 @@ class DCGAN():
                 if channels == 1:
                     sample_imgs = tf.reshape(sample_imgs,[-1, height, width])
                 # rescale the image pixels to be between 0 and 1
-                if restore_scale:
+                if self.restore_scale:
                     sample_imgs = self.restore_scale(sample_imgs)
                 fig, ax = plt.subplots(figsize = (15, 5), ncols = 10 )
                 for col in range(10):
@@ -207,11 +207,7 @@ class DCGAN():
 # 
 # ``` ipython nbconvert --to python my_DCGAN_class.ipynb```
 # 
-# This was suggested by Sarath Ak in the [this](https://stackoverflow.com/questions/52885901/how-to-save-python-script-as-py-file-on-jupyter-notebook/52886052) stackexchange post:
+# This was suggested by Sarath Ak in the [this](https://stackoverflow.com/questions/52885901/how-to-save-python-script-as-py-file-on-jupyter-notebook/52886052) stackexchange post.
 # 
-
-# In[1]:
-
-
-get_ipython().system('jupyter nbconvert --to python my_DCGAN_class.ipynb')
-
+# ``` ipython``` has been depricated. Use ```jupyter nbconvert --to python my_DCGAN_class.ipynb``` instead.
+# 
