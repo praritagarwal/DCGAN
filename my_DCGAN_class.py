@@ -23,10 +23,17 @@ from tensorflow.keras.layers import Conv2D, Conv2DTranspose
 
 
 class DCGAN():
-    def __init__(self):
+    def __init__(self, restore_scale = None):
+        
+        # restore_scale is the function to be used to restore the scale of images when
+        # displaying a sample of generated images
+        
         self.generator = None
         self.discriminator = None
         self.GAN = None
+        
+        # function to be used to restore the scale of images
+        self.restore_scale = restore_scale
         
     # function to build a generator of given specifications
     # Assumption: the first layer is a dense layer and 
@@ -184,6 +191,9 @@ class DCGAN():
                 _ ,height, width, channels = sample_imgs.shape
                 if channels == 1:
                     sample_imgs = tf.reshape(sample_imgs,[-1, height, width])
+                # rescale the image pixels to be between 0 and 1
+                if restore_scale:
+                    sample_imgs = self.restore_scale(sample_imgs)
                 fig, ax = plt.subplots(figsize = (15, 5), ncols = 10 )
                 for col in range(10):
                     ax[col].imshow(sample_imgs[col])
@@ -191,4 +201,17 @@ class DCGAN():
                     ax[col].set_title('pred: {: .2f}'.format(predictions[col][0]))
                 plt.show() 
         
+
+
+# In order to convert this notebook into a python module, use the following in command line:
+# 
+# ``` ipython nbconvert --to python my_DCGAN_class.ipynb```
+# 
+# This was suggested by Sarath Ak in the [this](https://stackoverflow.com/questions/52885901/how-to-save-python-script-as-py-file-on-jupyter-notebook/52886052) stackexchange post:
+# 
+
+# In[1]:
+
+
+get_ipython().system('jupyter nbconvert --to python my_DCGAN_class.ipynb')
 
